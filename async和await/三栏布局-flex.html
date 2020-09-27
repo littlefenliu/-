@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>flex</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .layout {
+            display: flex;
+        }
+        
+        .layout .left {
+            width: 300px;
+            background-color: pink;
+        }
+        
+        .layout .center {
+            flex: 1;
+            background-color: lightblue;
+        }
+        
+        .layout .right {
+            width: 300px;
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <div class="left">
+            左边
+        </div>
+        <div class="center">
+            中间 flex方法实现
+        </div>
+        <div class="right">
+            右边
+        </div>
+    </div>
+</body>
+
+</html>

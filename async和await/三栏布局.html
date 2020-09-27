@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .layout article div {
+            /* 设置每个小块的高度为100px  */
+            height: 100px;
+        }
+        
+        .layout .left {
+            float: left;
+            width: 300px;
+            background-color: pink;
+        }
+        
+        .layout .right {
+            float: right;
+            width: 300px;
+            background-color: purple;
+        }
+        
+        .layout .center {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1.左右浮动 中间自适应 -->
+    <section class="layout">
+        <article class="left-right-center">
+            <div class="left">
+                我是left
+            </div>
+            <div class="right">
+                我是right
+            </div>
+            <div class="center">
+                浮动解决
+            </div>
+        </article>
+    </section>
+</body>
+
+</html>

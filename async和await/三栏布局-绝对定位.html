@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .layout {
+            position: relative;
+        }
+        
+        .left {
+            position: absolute;
+            left: 0;
+            background-color: pink;
+            width: 300px;
+        }
+        
+        .center {
+            position: absolute;
+            left: 300px;
+            right: 300px;
+            background-color: lightblue;
+        }
+        
+        .right {
+            possition: absolute;
+            right: 0;
+            width: 300px;
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <div class="left">左边</div>
+        <div class="center">中间-绝对定位</div>
+        <div class="right">右边</div>
+    </div>
+</body>
+
+</html>

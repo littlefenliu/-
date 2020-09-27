@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grid布局</title>
+    <style>
+        .layout {
+            display: grid;
+            /* 设置网格布局 宽度为100% */
+            width: 100%;
+            grid-template-rows: 100px;
+            /* 重要：设置网格为三列，并设置每列的宽度。 */
+            grid-template-columns: 300px auto 300px;
+        }
+        
+        .left {
+            background-color: pink;
+        }
+        
+        .right {
+            background-color: lightblue;
+        }
+        
+        .center {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <div class="left">左边</div>
+        <div class="right">网格式布局</div>
+        <div class="center">右边</div>
+    </div>
+</body>
+
+</html>

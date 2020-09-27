@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function sidEffecting(arr) {
+        arr[0] = arr[2];
+        // console.log(arr);
+    }
+
+    function bar(a, b, c) {
+        c = 10;
+        sidEffecting(arguments);
+        // var args = [].slice.call();
+        var args = [...arguments];
+        console.log(args);
+        // return a + b + c;
+    }
+    bar(1, 1, 1);
+</script>
+<script>
+    // 定义连接字符串的函数
+    function myconcat(separator) {
+        // args将参数转换成数组
+        var args = [].slice.call(arguments, 1);
+        // 使用join方法连接
+        return args.join(separator);
+    }
+    var str = myconcat('*', 'here', 'is', 'an', 'apple');
+    //here*is*an*apple
+</script>
+<script>
+    function func(a = 55) {
+        console.log(a);
+        console.log(arguments[0]);
+    }
+    func(); // undefined
+</script>
+
+</html>

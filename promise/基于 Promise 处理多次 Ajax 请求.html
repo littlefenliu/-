@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    const request = require('request');
+    //promise封装接口1
+    const request1 = function() {
+            const promise = new Promise((resolve, reject) => {
+                request('http://www.baidu.com', function(response) {
+                    if (response.retCode == 200) {
+                        // 这里的 response 是接口1的返回结果
+                        resolve('request1 success' + response);
+                    } else {
+                        reject('接口请求失败');
+                    }
+                });
+            });
+            return promise;
+        }
+        //promise封装接口2
+    const request2 = function() {
+            const promise = new Promise((resolve, reject) => {
+                request('http://www.baidu.com', function(response) {
+                    if (response.retCode == 200) {
+                        // 这里的 response 是接口1的返回结果
+                        resolve('request2 success' + response);
+                    } else {
+                        reject('接口请求失败');
+                    }
+                });
+            });
+            return promise;
+        }
+        //promise封装接口3
+    const request3 = function() {
+            const promise = new Promise((resolve, reject) => {
+                request('http://www.baidu.com', function(response) {
+                    if (response.retCode == 200) {
+                        // 这里的 response 是接口1的返回结果
+                        resolve('request3 success' + response);
+                    } else {
+                        reject('接口请求失败');
+                    }
+                });
+            });
+            return promise;
+        }
+        // 先发起request1，等resolve后再发起request2；紧接着，等 request2有了 resolve之后，再发起 request3
+    request1().then((rest1) => {
+            //rest1是resolve（）中的参数
+            console.log(rest1);
+            return request2();
+        })
+        .then((rest2) => {
+            console.log(rest2);
+            return request3();
+        })
+        .then((rest3) => {
+            console.log(rest3);
+        });
+    // 上面代码中， then 是可以链式调用的， 后面的 then 可以拿到前面 resolve 出来的数据。
+</script>
+<script>
+    function queryData() {
+        return new Promise((resolve, reject) => {
+            setTimeout(function() {
+                //接口返回的数据
+                var data = {
+                    retCode: 0,
+                    msg: 'shentihao'
+                }
+                if (data.retCode == 0) {
+                    // 接口请求成功时调用
+                    resolve(data);
+                } else {
+                    // 接口请求失败时调用
+                    reject({
+                        retCode: -1,
+                        msg: 'network Error'
+                    });
+                }
+            }, 100);
+            queryData().then((data) => {
+                // 从resolve获取正常结果
+                console.log('接口请求成功时，走这里');
+                console.log(data);
+            }).catch((data) => {
+                // 从reject获取异常结果
+                console.log('接口请求失败时，走这里');
+                console.log(data);
+            }).finally(() => {
+                console.log('无论接口请求是否成功，都会这里');
+            })
+        });
+    }
+</script>
+<script>
+    function queryData(url) {
+        return new Promise((resolve, reject) => {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) return;
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // 处理正常结果
+                    resolve(xhr.responseText);
+                } else {
+                    // 处理异常结果
+                    reject('服务器错误');
+                }
+            };
+            xhr.open('get', url);
+            xhr.send(null);
+        });
+    }
+    var promise1 = queryData('http://localhost:3000/api1');
+    var promise2 = queryData('http://localhost:3000/api2');
+    var promise3 = queryData('http://localhost:3000/api3');
+    //全都成功执行all
+    Promise.all([promise1, promise2, promise3]).then((result) => {
+        console.log(result);
+    });
+    //有一个成功执行race
+    Promise.race([promise1, promise2, promise3]).then((result) => {
+        console.log(result);
+    });
+</script>
+
+</html>

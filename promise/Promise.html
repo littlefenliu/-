@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let promise = new Promise(function(resolve, reject) {
+        console.log("Promise");
+        resolve();
+    });
+    promise.then(function() {
+        console.log('resolved');
+    });
+    console.log('hi');
+</script>
+<script>
+    setTimeout(() => {
+        console.log(1);
+    }, 0);
+    new Promise(function(resolve, reject) {
+        console.log(2);
+        for (var i = 0; i < 1000; i++) {
+            if (i === 10) {
+                console.log(10);
+            }
+            i === 999 && resolve();
+        }
+        console.log(3);
+    }).then(function() {
+        console.log(4);
+    });
+    console.log(5);
+    //执行顺序：2 10 3 5 4 1
+</script>
+<script>
+    setTimeout(function() {
+        console.log('D');
+    }, 0);
+    var pro = new Promise(function(resolve, reject) {
+        console.log('A');
+        resolve('C');
+    });
+    console.log('B');
+
+    pro.then(function(value) {
+        console.log(value)
+    });
+</script>
+<script>
+    // Promise处理异步任务
+    const promise = new Promise((resolve, reject) => {
+        //先执行异步操作 这里以setTimeout举例
+        setTimeout(function() {
+            var data = {
+                retCode: 0,
+                msg: 'xuexipromise'
+            };
+            if (data.retCode == 0) {
+                //接口情趣成功时调用
+                resolve(data);
+            } else {
+                //接口请求失败时调用
+                reject({
+                    retCode: -1,
+                    msg: 'network error'
+                });
+            }
+        }, 100);
+    });
+    // 业务层接口调用
+    promise.then((data) => {
+        //从resolve获取正常结果
+        console.log(data);
+    }).catch((data) => {
+        //从reject获取异常结果
+        console.log(data);
+    });
+</script>
+<script>
+    // 封装Ajax请求
+    const request = require('request');
+    //Promise 封装接口
+    function require1() {
+        return new Promise((resolve, reject) => {
+            //先执行异步操作 这里是request请求 再判断request执行结果
+            request('http://www.baidu.com', function(response) {
+                if (response.retCode == 200) {
+                    resolve('request1 success' + response);
+                } else {
+                    reject('接口请求失败');
+                }
+            });
+        });
+    }
+    // 先发起request1，等resolve后再发起request2；紧接着，等 request2有了 resolve之后，再发起 request3
+    request1().then((res1) => {
+        // 接口1请求成功后，打印接口1的返回结果
+        console.log(res1);
+        return request2();
+    });
+</script>
+
+</html>
